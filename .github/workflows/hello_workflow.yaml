@@ -1,11 +1,24 @@
-name: hello_workflow
+# name: hello_workflow
+# on: [push]
+# jobs:
+#   print-hello:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v4
+#       - name: Hello world using echo
+#         run: echo "$(<hello.txt)"
+#       - name: Hello world using cat
+#         run: cat hello.txt
+
+name: commit_checkout
 on: [push]
 jobs:
-  print-hello:
+  external-workflow:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Hello world using echo
-        run: echo "$(<hello.txt)"
-      - name: Hello world using cat
-        run: cat hello.txt
+        with:
+          repository: abystoma/external-workflow
+          ref: 3eb718710f20d7df6874acdc41e189a2ae4182f5
+      - name: Greetings
+        run: echo "$(<greeting.txt)"
